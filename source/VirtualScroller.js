@@ -244,7 +244,7 @@ export default class VirtualScroller {
 		if (typeof window !== 'undefined') {
 			return this.getEstimatedItemsCount(this.getMargin() * 2 + this.scrollableContainer.getHeight())
 		} else {
-			return this.options.ssrItemCount || 1
+			return this.ssrItemCount || 1
 		}
 	}
 
