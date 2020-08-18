@@ -50,7 +50,8 @@ export default class VirtualScroller {
 			estimatedItemHeight,
 			// getItemState,
 			onItemFirstRender,
-			state
+			state,
+			ssrItemCount,
 		} = options
 
 		log('~ Initialize ~')
@@ -102,6 +103,8 @@ export default class VirtualScroller {
 		// make sense when used in a React application.
 		this.bypass = bypass
 		// this.bypassBatchSize = bypassBatchSize || 10
+		
+		this.ssrItemCount = ssrItemCount
 
 		this.initialItems = items
 		// this.margin = margin
@@ -241,7 +244,7 @@ export default class VirtualScroller {
 		if (typeof window !== 'undefined') {
 			return this.getEstimatedItemsCount(this.getMargin() * 2 + this.scrollableContainer.getHeight())
 		} else {
-			return 1
+			return this.options.ssrItemCount || 1
 		}
 	}
 
